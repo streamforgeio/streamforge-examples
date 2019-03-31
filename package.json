@@ -1,0 +1,19 @@
+{
+  "name": "streamforge-examples",
+  "version": "1.0.0",
+  "description": "Streamforge javascript samples",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/streamforgeio/streamforge-examples.git"
+  },
+  "author": "Ilker Riza ERNAS <rernas35@gmail.com> (http://devside.blogspot.com.tr/)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/streamforgeio/streamforge-examples/issues"
+  },
+  "homepage": "https://github.com/streamforgeio/streamforge-examples#readme"
+}
