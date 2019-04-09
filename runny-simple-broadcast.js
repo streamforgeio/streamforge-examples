@@ -48,7 +48,7 @@ var p = sf.Pipeline("runny-simple-broadcast").withComponent(
     .withSource(sf.Source("ethereum-calculation", sf.DataSourceType.LOCAL))
 ).withComponent(
 	sf.Broadcast("broadcast","compare",2)
-	.toSink(sf.APISink("api-compare-1","http://localhost:4499/api/trxs",
+	.toSink(sf.APISink("api-compare-1","http://www.mocky.io/v2/5cacee8e2f000077003a9428",
     {   "http.method":"POST",
 		"http.api-key":"8d77f7d14a4864931f15072255fc1b58de8941cd45a8a896ed4ebf99b93d2e33"}))
 		.toSink(sf.WSSink("ws-compare","ws://localhost:4498",
