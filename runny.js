@@ -52,7 +52,7 @@ var p = sf.Pipeline("runny").withComponent(
 	sf.Merge("merge",2)
 	.withSource("broadcast~0")
 	.withSource("broadcast~1")
-	.toSink(sf.APISink("api-compare","http://www.mocky.io:80/v2/5cacee8e2f000077003a9428",
+	.toSink(sf.APISink("api-compare","http://jumphost.streamforge.io:8080/api/trxs",
     {   "http.method":"POST",
         "http.api-key":"8d77f7d14a4864931f15072255fc1b58de8941cd45a8a896ed4ebf99b93d2e33"}))
 )
