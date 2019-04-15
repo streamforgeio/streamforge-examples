@@ -1,4 +1,4 @@
-const sf = require('./pipeline.js');
+const sf = require('streamforge');
 
 var p = sf.Pipeline("runny-simple-broadcast").withComponent(
 	sf.Zip("bitcoin-calculation")

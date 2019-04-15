@@ -3,34 +3,43 @@ const sf = require('streamforge');
 var p = sf.Pipeline("runny").withComponent(
 	sf.Zip("bitcoin-calculation")
 	.withProcess(function(p1, p2) {
+
+		print("btc:" + p1.amount );
 		var r = {
 			'amount': (p1.amount * p2.body.result.price.last)
 		}
 		return r;
 	})
 	.withSource(
-		sf.Source("btc-raw", sf.DataSourceType.GLOBAL).withThrottling(1,1)
+		sf.Source("btc-raw", sf.DataSourceType.GLOBAL).withConflation(function(s1,s2){
+			return {'amount': (s1.amount + s2.amount) }
+		})
 	)
 	.withSource(
 		sf.Source("ico-parity", sf.DataSourceType.GLOBAL, function(s) {
-			return s.ico == 'btc' &&
+			return	s.market == 'kraken' &&
+					s.ico == 'btc' &&
 				s.currency == 'usd' ;
 		}).withThrottling(1,1)
 	)
 ).withComponent(
 	sf.Zip("ethereum-calculation")
 	.withProcess(function(p1, p2) {
+		print("eth:" + p1.amount );
 		var r = {
 			'amount': (p1.amount * p2.body.result.price.last)
 		}
 		return r;
 	})
 	.withSource(
-		sf.Source("eth-pending", sf.DataSourceType.GLOBAL).withThrottling(1,1)
+		sf.Source("eth-pending", sf.DataSourceType.GLOBAL).withConflation(function(s1,s2){
+			return {'amount': (s1.amount + s2.amount) }
+		})
 	)
 	.withSource(
 		sf.Source("ico-parity", sf.DataSourceType.GLOBAL, function(s) {
-			return s.ico == 'eth' &&
+			return 	s.market == 'kraken' &&
+					s.ico == 'eth' &&
 				s.currency == 'usd';
 		}).withThrottling(1,1)
 	)
