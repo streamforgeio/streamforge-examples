@@ -46,12 +46,12 @@ var p = sf.Pipeline("runny").withComponent(
 ).withComponent(
     sf.Zip("compare", true)
 	.withProcess(function(p1, p2) {
-		print("biii");
 		var amount = {
 			"btc-usd-amount": p1.amount,
             "eth-usd-amount": p2.amount,
             "date" : new Date()
         };
+		print("json : " + amount);
         return {"request" : JSON.stringify(amount)};
 	}).withSource(sf.Source("bitcoin-calculation", sf.DataSourceType.LOCAL))
     .withSource(sf.Source("ethereum-calculation", sf.DataSourceType.LOCAL))
