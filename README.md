@@ -35,7 +35,7 @@ In this repository you can find streamforge samples. In the sample pipelines, th
 	- bitfinex
 	- coinbase-pro
 
-	It fetches for every 5 seconds.
+	It fetches for every 10 seconds.
 	
 	~~~javascript
 	{
@@ -149,4 +149,10 @@ Reading from trxs/POST.mock file: Not matched
 Reading from trxs/POST--{"btc-usd-amount":5159.865024306,"eth-usd-amount":0,"date":"2019-05-01T21:15:15.426Z"}.mock file: Not matched
 Reading from trxs/POST.mock file: Not matched
 Reading from trxs/POST--{"btc-usd-amount":5159.865024306,"eth-usd-amount":0,"date":"2019-05-01T21:15:15.426Z"}.mock file: Not matched
+~~~
+
+- stop pipeline version 0.0.1 
+
+~~~bash
+streamforge version-stop -p runny.js 0.0.1
 ~~~
