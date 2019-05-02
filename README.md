@@ -3,7 +3,7 @@
 In this repository you can find streamforge samples. In the sample pipelines, the following realtime datasources are used;
 
 - BTC transactions : Bitcoin realtime transactions include the following information ;  
-	- Transaction Id
+	- transaction id
 	- sender address
 	- receiver address
 	- amount 
@@ -17,7 +17,7 @@ In this repository you can find streamforge samples. In the sample pipelines, th
 "amount":4.3925782804}
 ~~~
 - ETH transactions : Bitcoin realtime transactions include the following information ;  
-	- Transaction Id
+	- transaction id
 	- sender address
 	- receiver address
 	- amount 
