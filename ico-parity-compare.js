@@ -1,6 +1,6 @@
 const sf = require('streamforge');
 
-var p = sf.Pipeline("runny").withComponent(
+var p = sf.Pipeline("ico-parity-compare").withComponent(
 	sf.Zip("bitcoin-calculation")
 	.withProcess(function(p1, p2) {
 

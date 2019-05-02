@@ -17,6 +17,6 @@
   },
   "homepage": "https://github.com/streamforgeio/streamforge-examples#readme",
   "dependencies": {
-    "streamforge": "^1.0.4"
+    "streamforge": "^1.0.6"
   }
 }
