@@ -1,7 +1,7 @@
 const sf = require('streamforge');
 
 var p = sf.Pipeline("total-btc-trx-1-min").withComponent(
-	sf.Zip("bitcoin-trx_listener")
+	sf.Flow("bitcoin-trx-listener")
 	.withProcess(function(p1) {
 
 		print("btc:" + p1.amount );
