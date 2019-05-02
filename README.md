@@ -133,6 +133,12 @@ localhost:streamforge-examples user$ streamforge version-list runny.js
 	- You can use **mockserver** npm package for http server
 	- Change the target **apisink url** in the **runny.js**. 
 
+	~~~bash
+	sf.APISink("api-compare","http://jumphost.streamforge.io:8080/api/trxs",
+    {   "http.method":"POST",
+        "http.api-key":"8d77f7d14a4864931f15072255fc1b58de8941cd45a8a896ed4ebf99b93d2e33"})
+	~~~
+
 - start pipeline version 0.0.1 
 
 ~~~bash
