@@ -11,10 +11,10 @@ In this repository you can find streamforge samples. In the sample pipelines, th
 	Sample Json: 
 
 	~~~javascript
-{"txId":"0x3104affda3c52068a1ee1b66bcf48e79ea95199d64146852ea1b38b97d78b229",
-"senders":["0x5514290d2c6C85C99dc48118757D961654848dec"],
-"receivers":["0x3D6AB64e5787B9e2aBCC3Bb1fc46c2b6f0970FfF"],
-"amount":4.3925782804}
+{"txId":"e77462d8ae764efab43822e438ef273a85f80adedf326a58494d460672d7409b",
+"senders":["1E8fXPwkXBWFkiRF2jj1v9fUdESXyAEofe"],
+"receivers":["33yeyQThCEkqj6qot1tB94kRJWZiUiPXxQ","bc1qpwm7adceuwxd7ldjwap6tzq04lc85ekvj4g3kp"],
+"amount":0.00614802}
 ~~~
 - ETH transactions : Bitcoin realtime transactions include the following information ;  
 	- transaction id
