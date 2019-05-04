@@ -3,8 +3,6 @@ const sf = require('streamforge');
 var p = sf.Pipeline("ico-parity-compare").withComponent(
 	sf.Zip("bitcoin-calculation")
 	.withProcess(function(p1, p2) {
-
-		print("btc:" + p1.amount );
 		var r = {
 			'amount': (p1.amount * p2.body.result.price.last)
 		}
@@ -12,7 +10,8 @@ var p = sf.Pipeline("ico-parity-compare").withComponent(
 	})
 	.withSource(
 		sf.Source("btc-raw", sf.DataSourceType.GLOBAL).withConflation(function(s1,s2){
-			return {'amount': (s1.amount + s2.amount) }
+			print("btc-txId:" + s2.txId );
+			return {'amount': (s1.amount + s2.amount),'txId':'total' }
 		})
 	)
 	.withSource(
@@ -25,7 +24,6 @@ var p = sf.Pipeline("ico-parity-compare").withComponent(
 ).withComponent(
 	sf.Zip("ethereum-calculation")
 	.withProcess(function(p1, p2) {
-		print("eth:" + p1.amount );
 		var r = {
 			'amount': (p1.amount * p2.body.result.price.last)
 		}
@@ -33,7 +31,8 @@ var p = sf.Pipeline("ico-parity-compare").withComponent(
 	})
 	.withSource(
 		sf.Source("eth-pending", sf.DataSourceType.GLOBAL).withConflation(function(s1,s2){
-			return {'amount': (s1.amount + s2.amount) }
+			print("eth-txId:" + s2.txId );
+			return {'amount': (s1.amount + s2.amount),'txId':'total' }
 		})
 	)
 	.withSource(
