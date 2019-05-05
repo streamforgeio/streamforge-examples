@@ -1,7 +1,7 @@
 const sf = require('streamforge');
 
 var p = sf.Pipeline("ico-parity-compare").withComponent(
-	sf.Zip("ethereum-trx-calculation")
+	sf.Zip("bitcoin-trx-calculation")
 	.withProcess(function(p1, p2) {
 		var r = {
 			'amount': (p1.amount * p2.body.result.price.last)
@@ -9,8 +9,8 @@ var p = sf.Pipeline("ico-parity-compare").withComponent(
         return {"request" : JSON.stringify(r)};
 	})
 	.withSource(
-		sf.Source("eth-pending", sf.DataSourceType.GLOBAL).withConflation(function(s1,s2){
-			print("eth-txId:" + s2.txId );
+		sf.Source("btc-raw", sf.DataSourceType.GLOBAL).withConflation(function(s1,s2){
+			print("btc-txId:" + s2.txId );
 			return {'amount': (s1.amount + s2.amount),'txId':'total' }
 		})
 	)
