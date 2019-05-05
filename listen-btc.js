@@ -4,7 +4,8 @@ var p = sf.Pipeline("total-btc-trx-1-min").withComponent(
 	sf.Flow("bitcoin-trx-listener")
 	.withProcess(function(p1) {
 		var r = {
-			'amount': p1.amount,'txId':p1.txId
+			'amount': p1.amount,'txId':p1.txId,
+            "date" : new Date()
 		}
 		return {"request" : JSON.stringify(r)};
 	})
