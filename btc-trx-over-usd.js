@@ -20,9 +20,7 @@ var p = sf.Pipeline("ico-parity-compare").withComponent(
 					s.ico == 'eth' &&
 				s.currency == 'usd';
 		})
-	).toSink(sf.APISink("api-compare","http://jumphost.streamforge.io:8080/api/trxs",
-    {   "http.method":"POST",
-        "http.api-key":"8d77f7d14a4864931f15072255fc1b58de8941cd45a8a896ed4ebf99b93d2e33"}))
+	).toSink(sf.LogSink("btc-usd-out"))
 )
 
 //console.log(JSON.stringify(p));

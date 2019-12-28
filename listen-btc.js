@@ -1,6 +1,6 @@
 const sf = require('streamforge');
 
-console.log('bisi')
+console.log('version 3')
 var p = sf.Pipeline("total-btc-trx-1-min").withComponent(
 	sf.Flow("bitcoin-trx-listener")
 	.withProcess(function(p1) {
@@ -12,7 +12,7 @@ var p = sf.Pipeline("total-btc-trx-1-min").withComponent(
 	})
 	.withSource(
 		sf.Source("btc-raw", sf.DataSourceType.GLOBAL,function(s) {
-			return 	s.amount > 1;
+			return 	s.amount > 2;
 		})
 	).toSink(sf.APISink("api-compare","http://jumphost.streamforge.io:8080/api/trxs",
     {   "http.method":"POST",
