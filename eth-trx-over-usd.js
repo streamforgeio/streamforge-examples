@@ -6,6 +6,7 @@ var p = sf.Pipeline("ico-parity-compare").withComponent(
 		var r = {
 			'amount': (p1.amount * p2.body.result.price.last)
 		}
+		logger.info('amount : ' + r.amount);
 		//print("amount:"  +p1.amount );
         return {"request" : JSON.stringify(r)};
 	})
