@@ -1,6 +1,8 @@
 # Streamforge Examples
 
-In this repository you can find streamforge samples. In the sample pipelines, the following realtime datasources are used;
+In this repository you can find streamforge samples. 
+
+In the sample pipelines, the following real time datasources are used;
 
 - BTC transactions : Bitcoin realtime transactions include the following information ;  
 	- transaction id
@@ -65,7 +67,7 @@ In this repository you can find streamforge samples. In the sample pipelines, th
 	}
 	~~~ 
 	
-## Steps
+## QuickStart
 
 - Install **streamforge-cli** as a npm package.
 
@@ -93,10 +95,10 @@ Commands:
   runtime-history [options] <pipelineVersion>
 ~~~
 
-- deploy runny.js on streamforge. runny.js builds a pipeline that perform a API POST call for every ~5 seconds
+- deploy eth-trx-over-usd.js on streamforge-examples. eth-trx-over-usd.js builds a pipeline that prints total eth transactions USD amount in every 30 seconds
 
 ~~~bash
-localhost:streamforge-examples user$ streamforge pipeline-add runny.js
+localhost:streamforge-examples user$ streamforge pipeline-add eth-trx-over-usd.js
 
 Adding pipeline runny.js
 [winston] Attempt to write logs with no transports {"level":"info","message":"pipelineName:temp"}
@@ -110,17 +112,17 @@ Adding pipeline runny.js
 ~~~bash
 localhost:streamforge-examples user$ streamforge pipeline-list
 
-┌────┬───────┬───────────────┐
-│ id │ name  │ version count │
-├────┼───────┼───────────────┤
-│ 1  │ runny │ 1             │
-└────┴───────┴───────────────┘
+┌────┬─────-----------──┬───────────────┐
+│ id │ name             │ version count │
+├────┼─────-----------──┼───────────────┤
+│ 1  │ eth-trx-over-usd │ 1             │
+└────┴──────-----------─┴───────────────┘
 ~~~
 
 - list  deployed pipeline versions on streamforge 
 
 ~~~bash
-localhost:streamforge-examples user$ streamforge version-list runny.js
+localhost:streamforge-examples user$ streamforge version-list eth-trx-over-usd.js
 
 ┌────┬─────────┬─────────┐
 │ id │ version │ status  │
@@ -129,36 +131,47 @@ localhost:streamforge-examples user$ streamforge version-list runny.js
 └────┴─────────┴─────────┘
 ~~~
 
-- Configure target http server 
-	- You can use **mockserver** npm package for http server
-	- Change the target **apisink url** in the **runny.js**. 
-
-	~~~bash
-	sf.APISink("api-compare","http://jumphost.streamforge.io:8080/api/trxs",
-    {   "http.method":"POST",
-        "http.api-key":"8d77f7d14a4864931f15072255fc1b58de8941cd45a8a896ed4ebf99b93d2e33"})
-	~~~
 
 - start pipeline version 0.0.1 
 
 ~~~bash
-streamforge version-start -p runny.js 0.0.1
+streamforge version-start -p eth-trx-over-usd.js 0.0.1
 ~~~
 
-- on the http server side output will be like ;
+- on the system out of pipeline will be like ;
 
 ~~~bash
-Reading from trxs/POST--{"btc-usd-amount":58453.61544495,"eth-usd-amount":7.852500000000001,"date":"2019-05-01T21:14:55.537Z"}.mock file: Not matched
-Reading from trxs/POST.mock file: Not matched
-Reading from trxs/POST--{"btc-usd-amount":58453.61544495,"eth-usd-amount":7.852500000000001,"date":"2019-05-01T21:14:55.537Z"}.mock file: Not matched
-Reading from trxs/POST.mock file: Not matched
-Reading from trxs/POST--{"btc-usd-amount":5159.865024306,"eth-usd-amount":0,"date":"2019-05-01T21:15:15.426Z"}.mock file: Not matched
-Reading from trxs/POST.mock file: Not matched
-Reading from trxs/POST--{"btc-usd-amount":5159.865024306,"eth-usd-amount":0,"date":"2019-05-01T21:15:15.426Z"}.mock file: Not matched
+17:53:36 INFO  JSEngine - amount : 55577.337635423086
+
+17:53:36 INFO  LogSink - [alias=eth-usd-out]{"amount":55577.337635423086}
+
+17:53:37 INFO  JSEngine - amount : 0
+
+17:53:37 INFO  LogSink - [alias=eth-usd-out]{"amount":0}
+
+17:54:46 INFO  JSEngine - amount : 0
+
+17:54:46 INFO  LogSink - [alias=eth-usd-out]{"amount":0}
+
+17:54:46 INFO  JSEngine - amount : 35511.69528436845
+
+17:54:46 INFO  LogSink - [alias=eth-usd-out]{"amount":35511.69528436845}
+
+17:55:56 INFO  JSEngine - amount : 40.92
+
+17:55:56 INFO  LogSink - [alias=eth-usd-out]{"amount":40.92}
+
+17:55:56 INFO  JSEngine - amount : 37078.618743495885
+
+17:55:56 INFO  LogSink - [alias=eth-usd-out]{"amount":37078.618743495885}
+
+17:57:08 INFO  JSEngine - amount : 0
+
+17:57:08 INFO  LogSink - [alias=eth-usd-out]{"amount":0}
 ~~~
 
 - stop pipeline version 0.0.1 
 
 ~~~bash
-streamforge version-stop -p runny.js 0.0.1
+streamforge version-stop -p eth-trx-over-usd.js 0.0.1
 ~~~
