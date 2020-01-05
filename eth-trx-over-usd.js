@@ -4,6 +4,7 @@ var p = sf.Pipeline("ico-parity-compare").withComponent(
 	sf.Zip("ethereum-trx-calculation")
 	.withProcess(function(p1, p2) {
 		var finalTrxs = [];
+		var trxCount = 1;
 		if (p1.trxs != undefined){
 			p1.trxs.sort(function (a,b) {
 				if (a.amount > b.amount) {
@@ -14,6 +15,7 @@ var p = sf.Pipeline("ico-parity-compare").withComponent(
 				}
 				return 0;
 			})
+			trxCount = p1.trxs.length;
 			finalTrxs = p1.trxs.slice(0,10);
 		} else {
 			finalTrxs.push({'id' : p1.txId, 'amount' : p1.amount})
@@ -22,7 +24,8 @@ var p = sf.Pipeline("ico-parity-compare").withComponent(
 
 		var r = {
 			'amount': (p1.amount * p2.body.result.price.last),
-			'topTrxs' : finalTrxs
+			'topTrxs' : finalTrxs,
+			'trxCount' : trxCount
 		}
         return {"request" : JSON.stringify(r) };
 	})
