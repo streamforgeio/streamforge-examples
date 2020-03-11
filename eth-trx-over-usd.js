@@ -49,7 +49,7 @@ var p = sf.Pipeline("ico-parity-compare").withComponent(
 					s.ico == 'eth' &&
 				s.currency == 'usd';
 		})
-	).toSink(sf.LogSink("eth-usd-out"))
+	).toSink(sf.RegAPISink("reg-api"))
 )
 
 //console.log(JSON.stringify(p));
