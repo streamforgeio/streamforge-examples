@@ -11,7 +11,7 @@ var p = sf.Pipeline("total-btc-trx-1-min").withComponent(
 		return {"request" : JSON.stringify(r)};
 	})
 	.withSource(
-		sf.Source("btc-raw", sf.DataSourceType.GLOBAL,function(s) {
+		sf.Source(sf.PredefinedSources.BITCOIN_TRANSACTIONS, function(s) {
 			return 	s.amount > 2;
 		})
 	).toSink(sf.APISink("api-compare","http://jumphost.streamforge.io:8080/api/trxs",

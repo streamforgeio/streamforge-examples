@@ -9,10 +9,10 @@ var p = sf.Pipeline("runny-simple-broadcast").withComponent(
 		return r;
 	})
 	.withSource(
-		sf.Source("btc-raw", sf.DataSourceType.GLOBAL).withThrottling(1,1)
+		sf.Source(sf.PredefinedSources.BITCOIN_TRANSACTIONS).withThrottling(1,1)
 	)
 	.withSource(
-		sf.Source("ico-parity", sf.DataSourceType.GLOBAL, function(s) {
+		sf.Source(sf.PredefinedSources.ICO_PARITY, function(s) {
 			return s.ico == 'btc' &&
 				s.currency == 'usd' ;
 		}).withThrottling(1,1)
@@ -26,10 +26,10 @@ var p = sf.Pipeline("runny-simple-broadcast").withComponent(
 		return r;
 	})
 	.withSource(
-		sf.Source("eth-pending", sf.DataSourceType.GLOBAL).withThrottling(1,1)
+		sf.Source(sf.PredefinedSources.ETHEREUM_PENDING_TRANSACTIONS).withThrottling(1,1)
 	)
 	.withSource(
-		sf.Source("ico-parity", sf.DataSourceType.GLOBAL, function(s) {
+		sf.Source(sf.PredefinedSources.ICO_PARITY, function(s) {
 			return s.ico == 'eth' &&
 				s.currency == 'usd';
 		}).withThrottling(1,1)
@@ -44,8 +44,8 @@ var p = sf.Pipeline("runny-simple-broadcast").withComponent(
             "date" : new Date()
         };
         return {"request" : JSON.stringify(amount)};
-	}).withSource(sf.Source("bitcoin-calculation", sf.DataSourceType.LOCAL))
-    .withSource(sf.Source("ethereum-calculation", sf.DataSourceType.LOCAL))
+	}).withSource(sf.Source("bitcoin-calculation"))
+    .withSource(sf.Source("ethereum-calculation"))
 ).withComponent(
 	sf.Broadcast("broadcast","compare",2)
 	.toSink(sf.APISink("api-compare-1","http://www.mocky.io/v2/5cacee8e2f000077003a9428",

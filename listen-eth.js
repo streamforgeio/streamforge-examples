@@ -10,7 +10,7 @@ var p = sf.Pipeline("total-btc-trx-1-min").withComponent(
 		return {"request" : JSON.stringify(r)};
 	})
 	.withSource(
-		sf.Source("eth-pending", sf.DataSourceType.GLOBAL).withThrottling(1,1)/*.withConflation(function(s1,s2){
+		sf.Source(sf.PredefinedSources.ETHEREUM_PENDING_TRANSACTIONS).withThrottling(1,1)/*.withConflation(function(s1,s2){
 			print("eth-txId:" + s2.txId );
 			return {'amount': (s1.amount + s2.amount),'txId':'total' }
 		})*/

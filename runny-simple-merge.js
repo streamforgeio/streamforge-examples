@@ -10,10 +10,10 @@ var p = sf.Pipeline("runny-simple-merge").withComponent(
 		return {"request" : JSON.stringify(r), "type" : "btc"};
 	})
 	.withSource(
-		sf.Source("btc-raw", sf.DataSourceType.GLOBAL).withThrottling(1,1)
+		sf.Source(sf.PredefinedSources.BITCOIN_TRANSACTIONS).withThrottling(1,1)
 	)
 	.withSource(
-		sf.Source("ico-parity", sf.DataSourceType.GLOBAL, function(s) {
+		sf.Source(sf.PredefinedSources.ICO_PARITY, function(s) {
 			return s.ico == 'btc' &&
 				s.currency == 'usd' ;
 		}).withThrottling(1,1)
@@ -28,10 +28,10 @@ var p = sf.Pipeline("runny-simple-merge").withComponent(
 		return {"request" : JSON.stringify(r)};
 	})
 	.withSource(
-		sf.Source("eth-pending", sf.DataSourceType.GLOBAL).withThrottling(1,1)
+		sf.Source(sf.PredefinedSources.ETHEREUM_PENDING_TRANSACTIONS).withThrottling(1,1)
 	)
 	.withSource(
-		sf.Source("ico-parity", sf.DataSourceType.GLOBAL, function(s) {
+		sf.Source(sf.PredefinedSources.ICO_PARITY, function(s) {
 			return s.ico == 'eth' &&
 				s.currency == 'usd';
 		}).withThrottling(1,1)

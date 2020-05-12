@@ -30,7 +30,7 @@ var p = sf.Pipeline("ico-parity-compare").withComponent(
         return {"request" : JSON.stringify(r) };
 	})
 	.withSource(
-		sf.Source("eth-pending", sf.DataSourceType.GLOBAL).withConflation(function(s1,s2){
+		sf.Source(sf.PredefinedSources.ETHEREUM_PENDING_TRANSACTIONS).withConflation(function(s1,s2){
 			//print("s1 amount:"  + s1.txId  + " amount:" + s1.amount);
 			//print("s2 amount:"  + s2.txId  + " amount:" + s2.amount);
 			var trxs = [];
@@ -44,14 +44,13 @@ var p = sf.Pipeline("ico-parity-compare").withComponent(
 		})
 	)
 	.withSource(
-		sf.Source("ico-parity", sf.DataSourceType.GLOBAL, function(s) {
+		sf.Source(sf.PredefinedSources.ICO_PARITY, function(s) {
 			return 	s.market == 'kraken' &&
 					s.ico == 'eth' &&
 				s.currency == 'usd';
 		})
 	)
 	.toSink(sf.LogSink("eth-usd-out"))
-	//.toSink(sf.RegAPISink("reg-api"))
 )
 
 //console.log(JSON.stringify(p));

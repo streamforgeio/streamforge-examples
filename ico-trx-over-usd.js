@@ -9,13 +9,13 @@ var p = sf.Pipeline("ico-parity-compare").withComponent(
 		return r;
 	})
 	.withSource(
-		sf.Source("btc-raw", sf.DataSourceType.GLOBAL).withConflation(function(s1,s2){
+		sf.Source(sf.PredefinedSources.BITCOIN_TRANSACTIONS).withConflation(function(s1,s2){
 			print("btc-txId:" + s2.txId );
 			return {'amount': (s1.amount + s2.amount),'txId':'total' }
 		})
 	)
 	.withSource(
-		sf.Source("ico-parity", sf.DataSourceType.GLOBAL, function(s) {
+		sf.Source(sf.PredefinedSources.ICO_PARITY, function(s) {
 			return	s.market == 'kraken' &&
 					s.ico == 'btc' &&
 				s.currency == 'usd' ;
@@ -30,13 +30,13 @@ var p = sf.Pipeline("ico-parity-compare").withComponent(
 		return r;
 	})
 	.withSource(
-		sf.Source("eth-pending", sf.DataSourceType.GLOBAL).withConflation(function(s1,s2){
+		sf.Source(sf.PredefinedSources.ETHEREUM_PENDING_TRANSACTIONS).withConflation(function(s1,s2){
 			print("eth-txId:" + s2.txId );
 			return {'amount': (s1.amount + s2.amount),'txId':'total' }
 		})
 	)
 	.withSource(
-		sf.Source("ico-parity", sf.DataSourceType.GLOBAL, function(s) {
+		sf.Source(sf.PredefinedSources.ICO_PARITY, function(s) {
 			return 	s.market == 'kraken' &&
 					s.ico == 'eth' &&
 				s.currency == 'usd';
@@ -52,8 +52,8 @@ var p = sf.Pipeline("ico-parity-compare").withComponent(
         };
 		print("json : " + amount);
         return {"request" : JSON.stringify(amount)};
-	}).withSource(sf.Source("bitcoin-calculation", sf.DataSourceType.LOCAL))
-	.withSource(sf.Source("ethereum-calculation", sf.DataSourceType.LOCAL))
+	}).withSource(sf.Source("bitcoin-calculation"))
+	.withSource(sf.Source("ethereum-calculation"))
 	.toSink(sf.APISink("api-compare","http://jumphost.streamforge.io:8080/api/trxs",
     {   "http.method":"POST",
         "http.api-key":"8d77f7d14a4864931f15072255fc1b58de8941cd45a8a896ed4ebf99b93d2e33"}))

@@ -9,13 +9,13 @@ var p = sf.Pipeline("ico-parity-compare").withComponent(
         return {"request" : JSON.stringify(r)};
 	})
 	.withSource(
-		sf.Source("btc-raw", sf.DataSourceType.GLOBAL).withConflation(function(s1,s2){
+		sf.Source(sf.PredefinedSources.BITCOIN_TRANSACTIONS).withConflation(function(s1,s2){
 			print("btc-txId:" + s2.txId );
 			return {'amount': (s1.amount + s2.amount),'txId':'total' }
 		})
 	)
 	.withSource(
-		sf.Source("ico-parity", sf.DataSourceType.GLOBAL, function(s) {
+		sf.Source(sf.PredefinedSources.ICO_PARITY, function(s) {
 			return 	s.market == 'kraken' &&
 					s.ico == 'eth' &&
 				s.currency == 'usd';
